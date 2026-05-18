@@ -1,0 +1,260 @@
+---
+const projects = [
+  {
+    n: "01",
+    name: "Seiko Boutique",
+    url: "https://www.seikoboutique.eu/",
+    role: "Refonte + intégration",
+    year: "2024-2026",
+    stack: "PrestaShop",
+  },
+  {
+    n: "02",
+    name: "Officine Générale",
+    url: "https://www.officinegenerale.com",
+    role: "Refonte + intégration",
+    year: "2021-2026",
+    stack: "Shopify",
+  },
+  {
+    n: "03",
+    name: "Fenom",
+    url: "https://fenom.com",
+    role: "Refonte + intégration",
+    year: "2022",
+    stack: "Shopify",
+  },
+  {
+    n: "04",
+    name: "Emile Henry",
+    url: "https://www.emilehenry.com",
+    role: "Refonte + intégration",
+    year: "2020",
+    stack: "PrestaShop",
+  },
+  {
+    n: "05",
+    name: "Nailmatic",
+    url: "https://nailmatic.com",
+    role: "Refonte + intégration",
+    year: "2020",
+    stack: "PrestaShop",
+  },
+  {
+    n: "06",
+    name: "Verdiel",
+    url: "https://verdiel.fr",
+    role: "Intégration",
+    year: "2019",
+    stack: "WordPress",
+  },
+];
+---
+
+<section class="works" id="works">
+  <header class="head">
+    <p class="mono label">§ 01 — Selected Works</p>
+    <h2 class="title serif">
+      Six boutiques.<br />
+      <span class="outline">Une obsession.</span>
+    </h2>
+  </header>
+
+  <ol class="list">
+    {projects.map((p) => (
+      <li class="item">
+        <a href={p.url} target="_blank" rel="noopener noreferrer" class="row">
+          <span class="num mono">{p.n}</span>
+          <span class="name serif">{p.name}</span>
+          <span class="meta mono">
+            <span class="role">{p.role}</span>
+            <span class="sep">/</span>
+            <span class="stack">{p.stack}</span>
+            <span class="sep">/</span>
+            <span class="year">{p.year}</span>
+          </span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
+    ))}
+  </ol>
+
+  <footer class="foot mono">
+    <span>+ Et quelques autres que je ne peux pas montrer.</span>
+    <span class="ping">[ 06 / 06 ]</span>
+  </footer>
+</section>
+
+<style>
+  .works {
+    background: var(--bg);
+    position: relative;
+    z-index: 1;
+  }
+
+  .head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: end;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  .label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    align-self: start;
+    padding-top: 0.5rem;
+  }
+
+  .title {
+    font-style: italic;
+    font-weight: 900;
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+  }
+
+  .title .outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--ink);
+    padding-left: clamp(2rem, 6vw, 5rem);
+    display: inline-block;
+  }
+
+  .list {
+    list-style: none;
+    border-top: 2px solid var(--ink);
+  }
+
+  .item {
+    border-bottom: 2px solid var(--ink);
+    overflow: hidden;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    align-items: baseline;
+    gap: clamp(1rem, 3vw, 2.5rem);
+    padding: clamp(1rem, 2.4vw, 1.75rem) 0;
+    position: relative;
+    transition: background 0.25s ease, color 0.25s ease, padding 0.25s ease;
+  }
+
+  .row::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--ink);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.35s cubic-bezier(0.6, 0, 0.2, 1);
+    z-index: 0;
+  }
+
+  .row > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .row:hover::before {
+    transform: scaleY(1);
+  }
+
+  .row:hover {
+    color: var(--bg);
+    padding-left: clamp(1rem, 3vw, 2.5rem);
+    padding-right: clamp(1rem, 3vw, 2.5rem);
+  }
+
+  .row:hover .arrow {
+    color: var(--accent);
+    transform: rotate(-45deg) translateX(0.15em);
+  }
+
+  .num {
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    transition: color 0.25s ease;
+  }
+
+  .row:hover .num {
+    color: var(--accent);
+  }
+
+  .name {
+    font-style: italic;
+    font-weight: 900;
+    font-size: clamp(2rem, 5.6vw, 5rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    min-width: 0;
+  }
+
+  .meta {
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    transition: color 0.25s ease;
+  }
+
+  .row:hover .meta {
+    color: var(--bg);
+  }
+
+  .sep {
+    opacity: 0.5;
+  }
+
+  .arrow {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    transition: transform 0.3s ease, color 0.25s ease;
+    display: inline-block;
+  }
+
+  .foot {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .ping {
+    color: var(--accent);
+  }
+
+  @media (max-width: 820px) {
+    .head {
+      grid-template-columns: 1fr;
+    }
+    .label {
+      writing-mode: horizontal-tb;
+      transform: none;
+    }
+    .row {
+      grid-template-columns: auto 1fr auto;
+      grid-template-areas:
+        "num name arrow"
+        ".   meta meta";
+      row-gap: 0.5rem;
+    }
+    .num { grid-area: num; }
+    .name { grid-area: name; white-space: normal; }
+    .meta { grid-area: meta; justify-content: flex-start; }
+    .arrow { grid-area: arrow; align-self: start; }
+  }
+</style>

@@ -1,0 +1,45 @@
+---
+import "../styles/global.css";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import BackgroundCanvas from "../components/BackgroundCanvas.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "François Peyret — Portfolio 2026",
+  description = "Développeur web e-commerce. Refonte, intégration et maintenance.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f4f1ea" />
+    <title>{title}</title>
+    <script is:inline>
+      (() => {
+        try {
+          const stored = localStorage.getItem("theme");
+          const sys = window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+          const theme = stored === "dark" || stored === "light" ? stored : sys;
+          document.documentElement.dataset.theme = theme;
+        } catch (_) {
+          document.documentElement.dataset.theme = "light";
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <BackgroundCanvas />
+    <ThemeToggle />
+    <slot />
+  </body>
+</html>

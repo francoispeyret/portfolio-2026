@@ -1,0 +1,139 @@
+---
+const year = new Date().getFullYear();
+---
+
+<section class="hero" id="hero">
+  <div class="meta top">
+    <span class="mono">FP / PORTFOLIO {year}</span>
+    <span class="mono">AUREC-SUR-LOIRE — FR</span>
+  </div>
+
+  <h1 class="title">
+    <span class="line">François</span>
+    <span class="line outline">Peyret<span class="dot">.</span></span>
+  </h1>
+
+  <div class="strap">
+    <p class="serif">
+      Développeur web e-commerce.<br />
+      Je conçois, intègre et maintiens des boutiques en ligne <em>taillées sur mesure</em>.
+    </p>
+    <p class="mono cue">↓ Scroll. Click. Play.</p>
+  </div>
+
+  <nav class="hero-nav mono" aria-label="Sections">
+    <a href="#works">01 — Works</a>
+    <a href="#skills">02 — Skills</a>
+    <a href="#about">03 — About</a>
+  </nav>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 2rem;
+    padding-top: clamp(1.5rem, 3vw, 2.5rem);
+    padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .meta.top {
+    padding-right: clamp(7rem, 12vw, 9rem);
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-style: italic;
+    font-size: clamp(5rem, 18vw, 18rem);
+    line-height: 0.82;
+    letter-spacing: -0.04em;
+    align-self: center;
+    margin-top: -0.2em;
+  }
+
+  .line {
+    display: block;
+  }
+
+  .line.outline {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--ink);
+    text-stroke: 2px var(--ink);
+    padding-left: clamp(2rem, 8vw, 6rem);
+  }
+
+  .dot {
+    color: var(--accent);
+    -webkit-text-stroke: 0;
+    text-stroke: 0;
+  }
+
+  .strap {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 2rem;
+  }
+
+  .strap p.serif {
+    font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+    max-width: 38ch;
+    line-height: 1.3;
+  }
+
+  .strap em {
+    background: var(--accent);
+    color: var(--bg);
+    padding: 0 0.25em;
+    font-style: italic;
+  }
+
+  .cue {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    align-self: end;
+    text-align: right;
+  }
+
+  .hero-nav {
+    display: flex;
+    gap: clamp(1rem, 4vw, 3rem);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-top: 2px solid var(--ink);
+    padding-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-nav a {
+    position: relative;
+    transition: color 0.2s ease;
+  }
+
+  .hero-nav a:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .strap {
+      grid-template-columns: 1fr;
+    }
+    .cue {
+      text-align: left;
+    }
+  }
+</style>

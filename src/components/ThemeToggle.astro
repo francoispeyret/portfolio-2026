@@ -1,0 +1,137 @@
+---
+---
+
+<button class="theme-toggle" type="button" aria-label="Basculer le thème" data-theme-toggle>
+  <span class="ring" aria-hidden="true">
+    <span class="dot"></span>
+  </span>
+  <span class="t-label mono" data-theme-label>DARK</span>
+</button>
+
+<script is:inline>
+  (() => {
+    const btn = document.querySelector("[data-theme-toggle]");
+    const labelEl = document.querySelector("[data-theme-label]");
+    if (!btn || !labelEl) return;
+
+    const meta = document.querySelector('meta[name="theme-color"]');
+    const colors = { light: "#f4f1ea", dark: "#0a0a0a" };
+
+    const sync = () => {
+      const current = document.documentElement.dataset.theme || "light";
+      labelEl.textContent = current === "dark" ? "LIGHT" : "DARK";
+      btn.setAttribute("aria-pressed", current === "dark" ? "true" : "false");
+      if (meta) meta.setAttribute("content", colors[current]);
+    };
+
+    sync();
+
+    btn.addEventListener("click", () => {
+      const next =
+        document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      document.documentElement.dataset.theme = next;
+      try {
+        localStorage.setItem("theme", next);
+      } catch (_) {}
+      sync();
+    });
+
+    if (window.matchMedia) {
+      const mq = window.matchMedia("(prefers-color-scheme: dark)");
+      mq.addEventListener?.("change", (e) => {
+        try {
+          if (localStorage.getItem("theme")) return;
+        } catch (_) {}
+        document.documentElement.dataset.theme = e.matches ? "dark" : "light";
+        sync();
+      });
+    }
+  })();
+</script>
+
+<style>
+  .theme-toggle {
+    position: fixed;
+    top: clamp(0.75rem, 1.5vw, 1.25rem);
+    right: clamp(0.75rem, 1.5vw, 1.25rem);
+    z-index: 50;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.5rem 0.75rem 0.5rem 0.6rem;
+
+    background: var(--bg);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1;
+
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease,
+      border-color 0.25s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .theme-toggle:hover {
+    background: var(--ink);
+    color: var(--bg);
+    transform: rotate(-2deg);
+  }
+
+  .theme-toggle:hover .ring {
+    border-color: var(--bg);
+  }
+
+  .theme-toggle:hover .dot {
+    background: var(--accent);
+  }
+
+  .ring {
+    position: relative;
+    display: inline-block;
+    width: 0.95rem;
+    height: 0.95rem;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    transition: border-color 0.25s ease;
+    overflow: hidden;
+  }
+
+  .dot {
+    position: absolute;
+    inset: 0;
+    background: var(--ink);
+    border-radius: 50%;
+    clip-path: inset(0 0 0 50%);
+    transition: background 0.25s ease, clip-path 0.35s ease;
+  }
+
+  [data-theme="dark"] .theme-toggle .ring {
+    border-color: var(--ink);
+  }
+
+  [data-theme="dark"] .theme-toggle .dot {
+    clip-path: inset(0 50% 0 0);
+  }
+
+  .t-label {
+    display: inline-block;
+    min-width: 2.6em;
+    text-align: left;
+  }
+
+  @media (max-width: 480px) {
+    .t-label {
+      display: none;
+    }
+    .theme-toggle {
+      padding: 0.5rem;
+    }
+  }
+</style>

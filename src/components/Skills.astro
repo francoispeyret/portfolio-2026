@@ -1,0 +1,288 @@
+---
+const categories = [
+  {
+    key: "Front-end",
+    note: "Ce que tu vois",
+    items: [
+      "HTML5",
+      "CSS / Sass",
+      "JavaScript ES6+",
+      "TypeScript",
+      "React",
+      "Astro",
+      "GSAP",
+      "Canvas2D",
+    ],
+  },
+  {
+    key: "E-commerce",
+    note: "Ce qui vend",
+    items: [
+      "Shopify",
+      "PrestaShop",
+      "WordPress",
+    ],
+  },
+  {
+    key: "Tooling",
+    note: "Ce qui tient",
+    items: [
+      "Git",
+      "Vite",
+      "Webpack",
+      "Docker",
+      "Cypress",
+      "Node",
+      "PHP",
+    ],
+  },
+  {
+    key: "Side",
+    note: "Ce qui amuse",
+    items: [
+      "Blender",
+      "p5.js",
+      "Three.js",
+      "Édition print",
+      "Photographie",
+    ],
+  },
+];
+
+const total = categories.reduce((acc, c) => acc + c.items.length, 0);
+---
+
+<section class="skills" id="skills">
+  <header class="head">
+    <p class="mono label">§ 02 — Toolbox</p>
+    <h2 class="title serif">
+      <span>Des outils,</span><br />
+      <span class="outline">pas une religion.</span>
+    </h2>
+    <p class="serif intro">
+      Je <em>choisis</em> la techno qui sert le projet. Pas l'inverse.<br />
+      Une petite bibliothèque accumulée depuis 2014.
+    </p>
+  </header>
+
+  <div class="grid">
+    {categories.map((cat, idx) => (
+      <article class="cat">
+        <header class="cat-head mono">
+          <span class="cat-n">0{idx + 1}</span>
+          <span class="cat-key">{cat.key}</span>
+          <span class="cat-note">/ {cat.note}</span>
+        </header>
+        <ul class="items">
+          {cat.items.map((item) => (
+            <li class="item serif">
+              <span class="bullet" aria-hidden="true">×</span>
+              <span class="label-it">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </article>
+    ))}
+  </div>
+
+  <footer class="foot mono">
+    <span>// Toujours en train d'apprendre. Toujours en train d'oublier des frameworks.</span>
+    <span class="count">[ {total} outils / 04 familles ]</span>
+  </footer>
+</section>
+
+<style>
+  .skills {
+    background: var(--bg-inv);
+    color: var(--ink-inv);
+  }
+
+  .head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "label title"
+      ".     intro";
+    gap: clamp(1.5rem, 4vw, 4rem) clamp(2rem, 6vw, 6rem);
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  .label {
+    grid-area: label;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-inv);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    align-self: start;
+    padding-top: 0.5rem;
+  }
+
+  .title {
+    grid-area: title;
+    font-style: italic;
+    font-weight: 900;
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+  }
+
+  .title .outline {
+    display: inline-block;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--ink-inv);
+    padding-left: clamp(2rem, 6vw, 5rem);
+  }
+
+  .intro {
+    grid-area: intro;
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.4;
+    max-width: 48ch;
+    color: var(--ink-inv);
+    opacity: 0.75;
+  }
+
+  .intro em {
+    background: var(--accent);
+    color: var(--bg-inv);
+    padding: 0 0.25em;
+    font-style: italic;
+    opacity: 1;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 2px solid var(--ink-inv);
+  }
+
+  .cat {
+    border-right: 2px solid var(--ink-inv);
+    padding: clamp(1.25rem, 2.5vw, 2rem) clamp(1rem, 2vw, 1.75rem);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  .cat:last-child {
+    border-right: none;
+  }
+
+  .cat-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px dashed var(--dashed-inv);
+  }
+
+  .cat-n {
+    color: var(--accent);
+  }
+
+  .cat-key {
+    color: var(--ink-inv);
+    font-weight: 700;
+  }
+
+  .cat-note {
+    color: var(--muted-inv);
+  }
+
+  .items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .item {
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(1.25rem, 1.9vw, 1.85rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5em;
+    transition: color 0.2s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: default;
+  }
+
+  .item:hover {
+    color: var(--accent);
+    transform: translateX(0.35em);
+  }
+
+  .bullet {
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: 0.7em;
+    color: var(--muted-inv);
+    transition: color 0.2s ease;
+  }
+
+  .item:hover .bullet {
+    color: var(--accent);
+  }
+
+  .foot {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-inv);
+    border-top: 2px solid var(--ink-inv);
+    padding-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .count {
+    color: var(--accent);
+  }
+
+  @media (max-width: 1024px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .cat:nth-child(2n) {
+      border-right: none;
+    }
+    .cat:nth-child(-n+2) {
+      border-bottom: 2px solid var(--ink-inv);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .head {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "label"
+        "title"
+        "intro";
+    }
+    .label {
+      writing-mode: horizontal-tb;
+      transform: none;
+    }
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .cat {
+      border-right: none !important;
+      border-bottom: 2px solid var(--ink-inv);
+    }
+    .cat:last-child {
+      border-bottom: none;
+    }
+  }
+</style>
