@@ -41,5 +41,135 @@ const {
     <BackgroundCanvas />
     <ThemeToggle />
     <slot />
+    <script>
+      (() => {
+        if (typeof window === "undefined") return;
+        const prm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (prm) return;
+
+        type Group = {
+          selector: string;
+          base: number;
+          step: number;
+        };
+
+        const groups: Group[] = [
+          // Hero (visible au load — cascade légère)
+          { selector: ".hero .meta.top", base: 60, step: 0 },
+          { selector: ".hero .title", base: 120, step: 0 },
+          { selector: ".hero .strap", base: 280, step: 0 },
+          { selector: ".hero .hero-nav", base: 360, step: 0 },
+          // Works
+          { selector: ".works .head", base: 0, step: 0 },
+          { selector: ".works .item", base: 60, step: 70 },
+          { selector: ".works .foot", base: 80, step: 0 },
+          // Skills
+          { selector: ".skills .head", base: 0, step: 0 },
+          { selector: ".skills .cat", base: 60, step: 90 },
+          { selector: ".skills .foot", base: 80, step: 0 },
+          // About
+          { selector: ".about .head", base: 0, step: 0 },
+          { selector: ".about .story", base: 80, step: 0 },
+          { selector: ".about .contact", base: 180, step: 0 },
+          { selector: ".about .colophon", base: 60, step: 0 },
+        ];
+
+        const tracked = new Set<HTMLElement>();
+
+        for (const g of groups) {
+          const els = document.querySelectorAll<HTMLElement>(g.selector);
+          els.forEach((el, i) => {
+            el.classList.add("reveal");
+            const d = g.base + i * g.step;
+            if (d > 0) el.style.transitionDelay = `${d}ms`;
+            tracked.add(el);
+          });
+        }
+
+        if (tracked.size === 0) return;
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-in");
+                io.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
+        );
+
+        tracked.forEach((el) => io.observe(el));
+      })();
+    </script>
+
+    <script>
+      // Smooth scroll for in-page anchor links — custom easing, distance-aware duration.
+      (() => {
+        if (typeof window === "undefined") return;
+        const prm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
+
+        let activeAnim: number | null = null;
+
+        const scrollTo = (targetY: number, duration: number) => {
+          if (activeAnim !== null) cancelAnimationFrame(activeAnim);
+          const startY = window.scrollY;
+          const dist = targetY - startY;
+          const startT = performance.now();
+
+          const step = (now: number) => {
+            const p = Math.min(1, (now - startT) / duration);
+            // behavior: 'instant' bypasses the CSS `scroll-behavior: smooth`
+            // we set on <html> — otherwise each frame would queue its own
+            // smooth scroll and nothing would actually move.
+            window.scrollTo({ top: startY + dist * easeOutQuart(p), behavior: "instant" });
+            if (p < 1) {
+              activeAnim = requestAnimationFrame(step);
+            } else {
+              activeAnim = null;
+            }
+          };
+          activeAnim = requestAnimationFrame(step);
+        };
+
+        // Stop the programmatic scroll if the user grabs control with their wheel/touch
+        const cancelOnUserScroll = (e: Event) => {
+          if (activeAnim !== null && e.isTrusted) {
+            cancelAnimationFrame(activeAnim);
+            activeAnim = null;
+          }
+        };
+        window.addEventListener("wheel", cancelOnUserScroll, { passive: true });
+        window.addEventListener("touchstart", cancelOnUserScroll, { passive: true });
+
+        document.addEventListener("click", (e) => {
+          const target = e.target as HTMLElement | null;
+          const link = target?.closest("a[href^='#']") as HTMLAnchorElement | null;
+          if (!link) return;
+          const href = link.getAttribute("href");
+          if (!href || href === "#") return;
+          const dest = document.querySelector<HTMLElement>(href);
+          if (!dest) return;
+
+          e.preventDefault();
+          const targetY = dest.getBoundingClientRect().top + window.scrollY;
+          const dist = Math.abs(targetY - window.scrollY);
+
+          if (prm) {
+            window.scrollTo({ top: targetY, behavior: "instant" });
+          } else {
+            // 0.6ms per px, clamped to [550ms, 1500ms]
+            const duration = Math.min(1500, Math.max(550, dist * 0.6));
+            scrollTo(targetY, duration);
+          }
+
+          // Keep the URL in sync without adding a history entry per click.
+          history.replaceState(null, "", href);
+        });
+      })();
+    </script>
   </body>
 </html>
