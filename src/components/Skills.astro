@@ -9,18 +9,20 @@ const categories = [
       "JavaScript ES6+",
       "TypeScript",
       "React",
+      "VueJS",
       "Astro",
       "GSAP",
       "Canvas2D",
     ],
   },
   {
-    key: "E-commerce",
-    note: "Ce qui vend",
+    key: "Back-end",
+    note: "Ce qui fait",
     items: [
+      "Symfony",
       "Shopify",
       "PrestaShop",
-      "WordPress",
+      "Woocommerce",
     ],
   },
   {
@@ -43,7 +45,7 @@ const categories = [
       "Blender",
       "p5.js",
       "Three.js",
-      "Édition print",
+      "Adobe",
       "Photographie",
     ],
   },
@@ -57,7 +59,7 @@ const total = categories.reduce((acc, c) => acc + c.items.length, 0);
     <p class="mono label">§ 02 — Toolbox</p>
     <h2 class="title serif">
       <span>Des outils,</span><br />
-      <span class="outline">pas une religion.</span>
+      <span class="outline">pas une religion<span class="dot">.</span></span>
     </h2>
     <p class="serif intro">
       Je <em>choisis</em> la techno qui sert le projet. Pas l'inverse.<br />
@@ -86,13 +88,13 @@ const total = categories.reduce((acc, c) => acc + c.items.length, 0);
   </div>
 
   <footer class="foot mono">
-    <span>// Toujours en train d'apprendre. Toujours en train d'oublier des frameworks.</span>
     <span class="count">[ {total} outils / 04 familles ]</span>
   </footer>
 </section>
 
 <style>
   .skills {
+    min-height: 100vh;
     background: var(--bg-inv);
     color: var(--ink-inv);
   }

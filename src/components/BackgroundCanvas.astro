@@ -41,6 +41,12 @@
           return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
         }
 
+        float hash13(vec3 p3) {
+          p3 = fract(p3 * 0.1031);
+          p3 += dot(p3, p3.yzx + 33.33);
+          return fract((p3.x + p3.y) * p3.z);
+        }
+
         float vnoise(vec2 p) {
           vec2 i = floor(p);
           vec2 f = fract(p);
@@ -61,6 +67,18 @@
             amp *= 0.5;
           }
           return v;
+        }
+
+        float gaussianNoise(vec2 p, float frame) {
+          float g = 0.0;
+          vec2 q = floor(p);
+          g += hash13(vec3(q + vec2(17.0, 43.0), frame + 1.0));
+          g += hash13(vec3(q + vec2(71.0, 113.0), frame + 2.0));
+          g += hash13(vec3(q + vec2(157.0, 191.0), frame + 3.0));
+          g += hash13(vec3(q + vec2(233.0, 281.0), frame + 4.0));
+          g += hash13(vec3(q + vec2(337.0, 389.0), frame + 5.0));
+          g += hash13(vec3(q + vec2(431.0, 487.0), frame + 6.0));
+          return (g / 6.0 - 0.5) * 2.0;
         }
 
         void main() {
@@ -110,10 +128,14 @@
             }
           }
           ripple = clamp(ripple, 0.0, 1.0);
-          // Ripple uses the inverse luminosity of the mouse field:
-          // dark splash on light theme, bright splash on dark theme.
-          vec3 rippleColor = vec3(1.0) - uLight;
-          col = mix(col, rippleColor, ripple * 0.25);
+          // Multiply the water-drop mask over the generated background texture.
+          vec3 dropBlend = mix(vec3(0.36), vec3(0.72), uLight.r);
+          col = mix(col, col * dropBlend, ripple * 0.78);
+
+          // Final monochrome gaussian film grain, layered above every effect.
+          float grainFrame = floor(uTime * 24.0);
+          float grain = gaussianNoise(gl_FragCoord.xy, grainFrame);
+          col = clamp(col + vec3(grain * 0.055), 0.0, 1.0);
 
           gl_FragColor = vec4(col, 1.0);
         }
@@ -211,10 +233,10 @@
         const ink = parseColor(cssVar("--ink"));
         const accent = parseColor(cssVar("--accent"));
         const theme = document.documentElement.dataset.theme || "light";
-        // Noise is harder to perceive on a pale background — push the deltas
-        // a bit further in light mode.
-        const k1 = theme === "dark" ? 0.16 : 0.22;
-        const k2 = theme === "dark" ? 0.34 : 0.42;
+        // Push the mist further from the base color: lighter on dark,
+        // darker on light, while keeping the same animated texture.
+        const k1 = theme === "dark" ? 0.26 : 0.32;
+        const k2 = theme === "dark" ? 0.58 : 0.64;
         palette.c0 = bg;
         palette.c1 = mix(bg, ink, k1);
         palette.c2 = mix(bg, ink, k2);

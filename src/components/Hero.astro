@@ -5,7 +5,6 @@ const year = new Date().getFullYear();
 <section class="hero" id="hero">
   <div class="meta top">
     <span class="mono">FP / PORTFOLIO {year}</span>
-    <span class="mono">AUREC-SUR-LOIRE — FR</span>
   </div>
 
   <h1 class="title">
@@ -15,18 +14,125 @@ const year = new Date().getFullYear();
 
   <div class="strap">
     <p class="serif">
-      Développeur web e-commerce.<br />
-      Je conçois, intègre et maintiens des boutiques en ligne <em>taillées sur mesure</em>.
+      Développeur web.<br />
+      Je conçois, intègre et maintiens des applications en ligne <em>taillées sur mesure</em>.
     </p>
-    <p class="mono cue">↓ Scroll. Click. Play.</p>
   </div>
 
-  <nav class="hero-nav mono" aria-label="Sections">
-    <a href="#works">01 — Works</a>
-    <a href="#skills">02 — Skills</a>
-    <a href="#about">03 — About</a>
+  <nav class="hero-nav" aria-label="Sections">
+    <span class="hero-nav-links">
+      <a href="#hero" aria-label="Accueil" data-label="Home">
+        <svg class="nav-icon" viewBox="0 0 576 512" aria-hidden="true" focusable="false">
+          <path d="M488 312.7V456c0 13.3-10.7 24-24 24H348c-6.6 0-12-5.4-12-12V356c0-6.6-5.4-12-12-12h-72c-6.6 0-12 5.4-12 12v112c0 6.6-5.4 12-12 12H112c-13.3 0-24-10.7-24-24V312.7c0-3.6 1.6-7 4.4-9.3l188-154.8c4.4-3.6 10.8-3.6 15.3 0l188 154.8c2.7 2.3 4.3 5.7 4.3 9.3zm83.6-60.9L488 182.9V44c0-6.6-5.4-12-12-12h-56c-6.6 0-12 5.4-12 12v72.9L318.5 43.2c-17.7-14.6-43.3-14.6-61 0L4.4 251.8c-5.1 4.2-5.8 11.8-1.6 16.9l25.5 31c4.2 5.1 11.8 5.8 16.9 1.6l235.2-193.7c4.4-3.6 10.8-3.6 15.3 0l235.2 193.7c5.1 4.2 12.7 3.5 16.9-1.6l25.5-31c4.2-5.2 3.4-12.7-1.7-16.9z"></path>
+        </svg>
+        <span class="nav-label">Home</span>
+      </a>
+      <a href="#works" aria-label="Works" data-label="Works">
+        <svg class="nav-icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false">
+          <path d="M320 336c0 8.8-7.2 16-16 16h-96c-8.8 0-16-7.2-16-16v-48H0v144c0 25.6 22.4 48 48 48h416c25.6 0 48-22.4 48-48V288H320v48zm144-208h-80V80c0-25.6-22.4-48-48-48H176c-25.6 0-48 22.4-48 48v48H48c-25.6 0-48 22.4-48 48v80h512v-80c0-25.6-22.4-48-48-48zm-144 0H192V96h128v32z"></path>
+        </svg>
+        <span class="nav-label">Works</span>
+      </a>
+      <a href="#skills" aria-label="Skills" data-label="Skills">
+        <svg class="nav-icon" viewBox="0 0 640 512" aria-hidden="true" focusable="false">
+          <path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5l-43.5 46.4c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"></path>
+        </svg>
+        <span class="nav-label">Skills</span>
+      </a>
+      <a href="#about" aria-label="About" data-label="About">
+        <svg class="nav-icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false">
+          <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512h388.6c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304h-91.4z"></path>
+        </svg>
+        <span class="nav-label">About</span>
+      </a>
+    </span>
   </nav>
+
+  <svg style="display: none">
+    <filter id="filter" color-interpolation-filters="linearRGB" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+      <feDisplacementMap in="SourceGraphic" in2="SourceGraphic" scale="20" xChannelSelector="R" yChannelSelector="B" x="0%" y="0%" width="100%" height="100%" result="displacementMap" />
+      <feGaussianBlur stdDeviation="3 3" x="0%" y="0%" width="100%" height="100%" in="displacementMap" edgeMode="none" result="blur" />
+    </filter>
+  </svg>
 </section>
+
+<script>
+  (() => {
+    if (typeof window === "undefined") return;
+
+    const nav = document.querySelector(".hero-nav");
+    const skills = document.querySelector("#skills");
+    const sections = ["hero", "works", "skills", "about"]
+      .map((id) => document.getElementById(id))
+      .filter((section) => section !== null);
+    const links = Array.from(nav?.querySelectorAll("a[href^='#']") ?? []);
+
+    if (!(nav instanceof HTMLElement) || !(skills instanceof HTMLElement) || links.length === 0) {
+      return;
+    }
+
+    let frame = 0;
+
+    const syncNavState = () => {
+      frame = 0;
+      const navRect = nav.getBoundingClientRect();
+      const sampleX = [
+        navRect.left + navRect.width * 0.25,
+        navRect.left + navRect.width * 0.5,
+        navRect.left + navRect.width * 0.75,
+      ];
+      const sampleY = [
+        navRect.top + 8,
+        navRect.top + navRect.height * 0.5,
+        navRect.bottom - 8,
+      ];
+      const isOverSkills = sampleX.some((x) =>
+        sampleY.some((y) =>
+          document.elementsFromPoint(x, y).some((el) => {
+            if (nav.contains(el)) return false;
+            return el.closest("section") === skills;
+          })
+        )
+      );
+      nav.classList.toggle("is-over-skills", isOverSkills);
+
+      const markerY = Math.min(window.innerHeight * 0.5, navRect.top - 24);
+      let activeId = sections[0]?.id ?? "";
+
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= markerY && rect.bottom > markerY) {
+          activeId = section.id;
+          break;
+        }
+        if (rect.top <= markerY) {
+          activeId = section.id;
+        }
+      }
+
+      links.forEach((link) => {
+        const isActive = link.getAttribute("href") === `#${activeId}`;
+        link.classList.toggle("is-active", isActive);
+        if (isActive) {
+          link.setAttribute("aria-current", "location");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    };
+
+    const requestSync = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(syncNavState);
+    };
+
+    syncNavState();
+    window.addEventListener("scroll", requestSync, { passive: true });
+    window.addEventListener("resize", requestSync);
+    window.visualViewport?.addEventListener("scroll", requestSync, { passive: true });
+    window.visualViewport?.addEventListener("resize", requestSync);
+  })();
+</script>
 
 <style>
   .hero {
@@ -74,11 +180,6 @@ const year = new Date().getFullYear();
     padding-left: clamp(2rem, 8vw, 6rem);
   }
 
-  .dot {
-    color: var(--accent);
-    -webkit-text-stroke: 0;
-    text-stroke: 0;
-  }
 
   .strap {
     display: grid;
@@ -109,23 +210,171 @@ const year = new Date().getFullYear();
   }
 
   .hero-nav {
+    position: fixed;
+    left: 50%;
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    z-index: 200;
     display: flex;
-    gap: clamp(1rem, 4vw, 3rem);
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border-top: 2px solid var(--ink);
-    padding-top: 1rem;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: min(calc(100vw - 2rem), 21rem);
+    min-height: 3.8rem;
+    overflow: visible;
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    border-radius: 2rem;
+    background-color: rgba(255, 255, 255, 0.18);
+    padding: 0.45rem;
+    color: var(--ink);
+    font-size: 1rem;
+    box-shadow:
+      0 1.25rem 3rem rgba(0, 0, 0, 0.2),
+      0 0.35rem 0.9rem rgba(0, 0, 0, 0.12);
+    transform: translateX(-50%);
+    backdrop-filter: url(#filter) blur(5px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 1;
+    isolation: isolate;
+    transition:
+      transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+      color 0.2s ease,
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .hero-nav.is-over-skills {
+    color: var(--ink-inv);
+  }
+
+  .hero-nav-links {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.35rem, 2vw, 0.75rem);
+    width: 100%;
   }
 
   .hero-nav a {
     position: relative;
-    transition: color 0.2s ease;
+    flex: 1 1 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    height: 2.9rem;
+    border-radius: 1.5rem;
+    padding: 0;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.82);
+    transition:
+      background 0.2s ease,
+      box-shadow 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s ease;
   }
 
-  .hero-nav a:hover {
+  .hero-nav a::after {
+    content: attr(data-label);
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 0.65rem);
+    z-index: 4;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+    background: rgba(10, 10, 10, 0.76);
+    padding: 0.32rem 0.55rem;
+    color: #f4f1ea;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 0.25rem);
+    transition:
+      opacity 0.18s ease,
+      transform 0.18s ease;
+  }
+
+  .nav-icon {
+    display: block;
+    width: 1.18rem;
+    height: 1.18rem;
+    fill: currentColor;
+    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.28));
+  }
+
+  .hero-nav a.is-active {
     color: var(--accent);
+  }
+
+  .nav-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+  }
+
+  .hero-nav a:hover,
+  .hero-nav a:focus-visible {
+    background: rgba(255, 255, 255, 0.28);
+    box-shadow:
+      inset -1px -1px 2px rgba(0, 0, 0, 0.08),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.34);
+    color: var(--accent);
+    transform: translateY(-1px);
+    outline: none;
+  }
+
+  .hero-nav a:hover::after,
+  .hero-nav a:focus-visible::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  .liquid-glass-filter {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  :global([data-theme="dark"]) .hero-nav {
+    border-color: rgba(244, 241, 234, 0.18);
+    box-shadow:
+      0 1.25rem 3rem rgba(0, 0, 0, 0.5),
+      0 0.35rem 0.9rem rgba(0, 0, 0, 0.28);
+  }
+
+  :global([data-theme="dark"]) .liquid-glass-tint {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(244, 241, 234, 0.2),
+        rgba(244, 241, 234, 0.06) 48%,
+        rgba(244, 241, 234, 0.14)
+      );
+  }
+
+  :global([data-theme="dark"]) .hero-nav a:hover,
+  :global([data-theme="dark"]) .hero-nav a:focus-visible {
+    background: rgba(244, 241, 234, 0.16);
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .liquid-glass-effect {
+      background: rgba(244, 241, 234, 0.72);
+      filter: none;
+    }
+
+    :global([data-theme="dark"]) .liquid-glass-effect {
+      background: rgba(10, 10, 10, 0.72);
+    }
   }
 
   @media (max-width: 640px) {
@@ -134,6 +383,32 @@ const year = new Date().getFullYear();
     }
     .cue {
       text-align: left;
+    }
+
+    .hero-nav {
+      width: min(calc(100vw - 1rem), 18rem);
+      min-height: 3.35rem;
+      border-radius: 1.65rem;
+      padding: 0.35rem;
+    }
+
+    .hero-nav-links {
+      gap: 0.2rem;
+    }
+
+    .hero-nav a {
+      height: 2.55rem;
+    }
+
+    .nav-icon {
+      width: 1.05rem;
+      height: 1.05rem;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .hero-nav {
+      width: min(calc(100vw - 1rem), 16.5rem);
     }
   }
 </style>
